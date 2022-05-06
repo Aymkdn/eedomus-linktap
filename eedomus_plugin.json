@@ -1,0 +1,82 @@
+{
+	"plugin_id": "linktap",
+	"name_fr": "LinkTap Arrosage",
+	"icon": "linktap.png",
+	"version": "1.0",
+	"creation_date": "2022-04-25",
+	"modification_date": "2022-04-25",
+	"author": "<a href=\"https://kodono.info\">AymKdn</a>",
+	"description_fr": "Ajoute un périphérique Arrosage de la marque LinkTap.",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "https://forum.eedomus.com/viewtopic.php?f=50&t=11354",
+	"parameters": [
+		{
+			"parameter": "USERNAME",
+			"description": "Username pour accéder à LinkTap",
+			"xtype": "textfield",
+      "field": "allowBlank:false, style:'width:480px'"
+	  },
+    {
+      "parameter": "APIKEY",
+      "description": "Clé API fournie par LinkTap",
+      "xtype": "textfield",
+      "field": "allowBlank:false, style:'width:480px'"
+    },
+    {      
+      "parameter": "GATEWAYID",
+      "description": "L'ID de la gateway",
+      "xtype": "textfield",
+      "field": "allowBlank:false, style:'width:480px'"
+    },
+    {      
+      "parameter": "TAPLINKERID",
+      "description": "L'ID du TapLinker",
+      "xtype": "textfield",
+      "field": "allowBlank:false, style:'width:480px'"
+    },
+    {      
+      "parameter": "DURATION",
+      "description": "La durée par défaut",
+      "xtype": "numberfield",
+      "default_value": "30",
+      "field": "minValue:1, maxValue:1439, allowDecimals:false, width:60, allowBlank:false"
+    }
+	],
+	"scripts": [
+		{
+			"name": "linktap.php"
+		}
+	],
+	"devices": [
+		{
+			"device_id": "linktap_arrosage",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name",
+			"icon": "linktap.png",
+			"utilisation_id": "43",
+      "value_type": "list",
+      "values": [
+        {
+          "value": "0",
+          "http_url": "http://localhost/script/?exec=linktap.php", 
+          "http_type": "GET",
+          "http_params": "&username=plugin.parameters.USERNAME&apiKey=plugin.parameters.APIKEY&gatewayId=plugin.parameters.GATEWAYID&taplinkerId=plugin.parameters.TAPLINKERID&duration=plugin.parameters.DURATION&action=[RAW_VALUE]",
+          "description": "Off",
+          "icon": "linktap_off.png"
+        },
+        {
+          "value": "100",
+          "http_url": "http://localhost/script/?exec=linktap.php", 
+          "http_type": "GET",
+          "http_params": "&username=plugin.parameters.USERNAME&apiKey=plugin.parameters.APIKEY&gatewayId=plugin.parameters.GATEWAYID&taplinkerId=plugin.parameters.TAPLINKERID&duration=plugin.parameters.DURATION&action=[RAW_VALUE]",
+          "description": "On",
+          "icon": "linktap_on.png"
+        }
+      ]
+		}
+	]
+}
